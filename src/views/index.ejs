@@ -1,9 +1,24 @@
-<h3>请选择要配置的内容</h3>
-<div>
-  <a>钉钉机器人配置</a>
-  <a>ActionView与钉钉人员 映射配置</a>
-  <a>提醒项目与类型配置</a>
-</div>
-
+<main>
+  <h3>请选择要配置的内容</h3>
+  <div class="config-box">
+    <a href="/workbench/robot">钉钉Robot配置</a>
+    <a>ActionView与钉钉人员 映射配置</a>
+    <a>提醒项目与类型配置</a>
+  </div>
+</main>
 <style>
+main {
+  width: 400px;
+  margin: 0 auto;
+}
+.config-box a {
+  display: block;
+  margin-bottom: 5px;
+  text-decoration: none;
+  color: #409EFF;
+  cursor: pointer;
+}
+.config-box a:hover {
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.4));
+}
 </style>

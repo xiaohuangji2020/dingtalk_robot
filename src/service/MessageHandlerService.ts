@@ -5,7 +5,8 @@ const actionViewUrlPrefix = 'http://actionview.wulianshuntong.com/project/feng/i
 const robotCode = 'dingezxtkqhm27mquovp';
 
 @service()
-export class MessageService {
+// 只负责处理和生成消息，不负责发消息，发消息在robotservice中
+export class MessageHandlerService {
 
   public getHelloMessage () {
     return this.getTextMessage('人工智障在此，作者：圆企鹅');

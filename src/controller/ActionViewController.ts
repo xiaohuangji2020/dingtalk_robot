@@ -2,7 +2,7 @@ import { controller, post, inject, DarukContext } from 'daruk';
 import { BaseController } from './BaseController';
 import { RobotService } from '@/service/RobotService';
 import { ActionViewService } from '@/service/ActionViewService';
-import { MessageService } from '@/service/MessageService';
+import { MessageHandlerService } from '@/service/MessageHandlerService';
 
 @controller()
 export class RobotController extends BaseController {
@@ -10,8 +10,8 @@ export class RobotController extends BaseController {
   @inject('ActionViewService')
   private actionViewService: ActionViewService;
 
-  @inject('MessageService')
-  private messageService: MessageService;
+  @inject('MessageHandlerService')
+  private messageHandlerService: MessageHandlerService;
 
   @inject('RobotService')
   private robotService: RobotService;
@@ -24,7 +24,7 @@ export class RobotController extends BaseController {
       ctx.body = this.error();
       return;
     }
-    const message = this.messageService.handleActionViewNotice(actionViewItem);
+    const message = this.messageHandlerService.handleActionViewNotice(actionViewItem);
     console.log(JSON.stringify(message));
     this.robotService.sendMessage(message);
     ctx.body = `done ${Date.now()}`;
