@@ -2,13 +2,12 @@ import { controller, get, DarukContext } from 'daruk';
 import { BaseController } from './BaseController';
 
 @controller()
-export class TestController extends BaseController {
+export class WorkbenchController extends BaseController {
 
-  @get('/test')
+  @get('/workbench')
   public async index(ctx: DarukContext) {
-    console.log('ctx', ctx);
     await ctx.render('index', {
-      title: 'llll'
+      title: 'actionview to 钉钉提醒机器人 配置'
     });
   }
 }

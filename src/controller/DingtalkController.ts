@@ -2,13 +2,10 @@ import { controller, get, DarukContext } from 'daruk';
 import { BaseController } from './BaseController';
 
 @controller()
-export class TestController extends BaseController {
+export class DingtalkController extends BaseController {
 
-  @get('/test')
+  @get('/dingtalk/getPeople')
   public async index(ctx: DarukContext) {
-    console.log('ctx', ctx);
-    await ctx.render('index', {
-      title: 'llll'
-    });
+    ctx.body = this.ok();
   }
 }
