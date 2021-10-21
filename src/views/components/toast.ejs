@@ -1,0 +1,48 @@
+<style>
+.toast {
+  position: fixed;
+  z-index: 999;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid var(--default-border);
+  background-color: var(--default-background);
+  color: var(--default-text);
+  border-radius: 4px;
+  padding: 10px 20px;
+  opacity: 0.3;
+}
+.toast.success {
+  border-color: var(--success-border);
+  background-color: var(--success-background);
+  color: var(--success-text);
+}
+.toast.info {
+  border-color: var(--info-border);
+  background-color: var(--info-background);
+  color: var(--info-text);
+}
+.toast.warn {
+  border-color: var(--warn-border);
+  background-color: var(--warn-background);
+  color: var(--warn-text);
+}
+.toast.error {
+  border-color: var(--error-border);
+  background-color: var(--error-background);
+  color: var(--error-text);
+}
+</style>
+
+<script>
+  function toast (text, type = 'success', timeout = 2000) {
+    const $el = $(`<div class="toast ${type}">${text}</div>`)
+    $el.appendTo('body').transition({
+      opacity: 1,
+      top: '40px',
+    }, 300)
+    setTimeout(() => {
+      $el.transition({opacity: 0.3, top: '20px'}, 100, () => {$el.remove()})
+    }, timeout)
+  }
+</script>

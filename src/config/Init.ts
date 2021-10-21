@@ -2,6 +2,7 @@ import { getManager } from 'typeorm';
 import { User } from '@/entities/User';
 import { ActionViewProject } from '@/entities/ActionViewProject';
 import { ActionViewType } from '@/entities/ActionViewType';
+import { Robot } from '@/entities/Robot';
 // import { Role } from '@/entities/Role';
 import localCache from '@/config/LocalCache';
 
@@ -29,4 +30,12 @@ export default async () => {
   // roles.forEach(role => {
   //   localCache.roleObj[role.roleId] = role.positionName;
   // });
+
+  const robots = await entityManager.find(Robot);
+  const robot = robots.pop();
+  if (robot) {
+    localCache.robotObj.id = robot.id;
+    localCache.robotObj.appKey = robot.appKey;
+    localCache.robotObj.appSecret = robot.appSecret;
+  }
 };

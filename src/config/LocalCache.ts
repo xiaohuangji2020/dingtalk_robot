@@ -1,6 +1,13 @@
+interface RobotInterface {
+  id: number,
+  appKey: string,
+  appSecret: string,
+}
+
 export const userObj: Record<number, string> = {};
 export const userEmailToDingtalkObj: Record<string, string> = {};
 export const roleObj: Record<number, string> = {};
+export const robotObj: RobotInterface = { id: 1, appKey: '', appSecret: ''};
 
 // action view project的类型，project key 对应 name
 export const actionViewProjectKeyToNameObj: Record<string, string> = {};
@@ -17,6 +24,7 @@ export default {
   userObj,
   userEmailToDingtalkObj,
   roleObj,
+  robotObj,
   actionViewProjectKeyToNameObj,
   actionViewTypeProjectKeyUnionIdToNameObj,
   dingtalkCache

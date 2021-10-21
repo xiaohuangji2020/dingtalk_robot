@@ -1,14 +1,81 @@
 <main>
   <h3>钉钉机器人配置</h3>
   <div class="config-box">
-    <p>appKey：<%=data.appKey%></p>
-    <p>appSecret：<%=data.appSecret%></p>
+    <p>appKey：<span class="not-in-edit"><%=data.appKey%></span><input class="in-edit app-info-input" name="appKey" value="<%=data.appKey%>"/></p>
+    <p>appSecret：<span class="not-in-edit"><%=data.appSecret%></span><input class="in-edit app-info-input" name="appSecret" value="<%=data.appSecret%>"/></p>
     <p>当前token：<%=data.token%></p>
   </div>
+  <div class="op">
+    <button onclick="refreshToken()">立即刷新token</button>
+    <button class="not-in-edit" onclick="edit()">手动编辑</button>
+    <button class="in-edit" onclick="cancel()">取消</button>
+    <button class="in-edit primary" onclick="save()">提交保存</button>
+  </div>
 </main>
+<script>
+  function edit () {
+    $('.not-in-edit').hide();
+    $('.in-edit').show();
+  }
+
+  function cancel () {
+    $('.not-in-edit').show();
+    $('.in-edit').hide();
+  }
+
+  function save () {
+    const appKey = $('input[name=appKey]').val();
+    const appSecret = $('input[name=appSecret]').val();
+    $.ajax({
+      type : 'post',
+      url: '/workbench/robot/save/appInfo',
+      data: {
+        appKey, appSecret
+      }
+    }).success(({code, data, message}) => {
+      if (code === 0) {
+        toast('保存成功，2s后自动刷新页面')
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+        return
+      }
+      toast('保存失败', 'error')
+    }).error(() => {
+      toast('保存失败', 'error')
+    })
+  }
+
+  function refreshToken () {
+    $.ajax({
+      type : 'post',
+      url: '/workbench/robot/refresh/token'
+    }).success(({code, data, message}) => {
+      if (code === 0) {
+        toast('刷新成功，2s后自动刷新页面')
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+        return
+      }
+      toast('刷新失败', message || 'error')
+    }).error(() => {
+      toast('刷新失败', 'error')
+    })
+  }
+</script>
 <style>
 main {
   width: 800px;
   margin: 0 auto;
+}
+button {
+  cursor: pointer;
+}
+.in-edit {
+  display: none;
+}
+.app-info-input {
+  width: 100%;
 }
 </style>
